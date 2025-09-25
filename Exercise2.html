@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Online Shopping Cart</title>
+</head>
+<body>
+  <h1>My Shopping Cart</h1>
+  <div id="cart"></div>
+  <div id="cart-total"></div>
+  <script>
+// Create an array with at least 3 cart items
+    let cart = [
+      {
+        name: "Laptop",
+        price: 250000,
+        quantity: 1,
+        getTotal() { return this.price * this.quantity; }
+      },
+      {
+        name: "Headphones",
+        price: 15000,
+        quantity: 2,
+        getTotal() { return this.price * this.quantity; }
+      },
+   {
+        name: "Mouse",
+        price: 8000,
+        quantity: 3,
+        getTotal() { return this.price * this.quantity; }
+      }
+    ];
+    // Function to calculate total cost of all items
+    function getCartTotal(cart) {
+      return cart.reduce((sum, item) => sum + item.getTotal(), 0);
+    }
+    // Display items on the page
+    let cartDiv = document.getElementById("cart");
+cart.forEach(item => {
+      let p = document.createElement("p");
+      p.textContent = `${item.name} - ₦${item.price} x ${item.quantity} = ₦${item.getTotal()}`;
+      cartDiv.appendChild(p);
+    });
+    // Display total
+    document.getElementById("cart-total").textContent =
+      "Total Cart Value: ₦" + getCartTotal(cart);
+   
+   
+  </script>
+</body>
+     <style>
+        body{
+            background-color: aquamarine;
+        }
+     </style>      
+            
+            
+            
+          
+</html>

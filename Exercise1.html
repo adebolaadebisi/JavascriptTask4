@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Collection Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e1e2f;
+      color: #f5f5f5;
+      text-align: center;
+      padding: 20px;
+    }
+h1 {
+      color: #ffcc00;
+    }
+    .movie {
+      background: #2c2c3c;
+      margin: 15px auto;
+      padding: 15px;
+      border-radius: 8px;
+      max-width: 400px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+ }
+    .movie h2 {
+      margin: 0;
+      color: #ff6f61;
+    }
+    .watched {
+      color: #00ff99;
+      font-weight: bold;
+    }
+    .not-watched {
+      color: #ff4444;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1> My Movie Collection</h1>
+  <div id="movies-list"></div>
+  <script>
+    // Movie objects
+    let movies = [
+      {
+        title: "Inception",
+        director: "Christopher Nolan",
+        releaseYear: 2010,
+        rating: 9,
+        isWatched: true,
+        getSummary: function () {
+            return `${this.title} (${this.releaseYear}), directed by ${this.director}, rated ${this.rating}/10`;
+        }
+      },
+      {
+        title: "Away From Home",
+        director: "David",
+        releaseYear: 2025,
+        rating: 8.6,
+        isWatched: false,
+        getSummary: function () {
+          return `${this.title} (${this.releaseYear}), directed by ${this.director}, rated ${this.rating}/10`;
+        }
+      },
+{
+        title: "Just Us Girls",
+        director: "Pastor Mildred",
+        releaseYear: 2025,
+        rating: 8.7,
+        isWatched: true,
+        getSummary: function () {
+          return `${this.title} (${this.releaseYear}), directed by ${this.director}, rated ${this.rating}/10`;
+        }
+      }
+    ];
+    // Display only top rated movies (rating > 8)
+    let topRated = movies.filter(movie => movie.rating > 8);
+     let movieListDiv = document.getElementById("movies-list");
+    topRated.forEach(movie => {
+      let div = document.createElement("div");
+      div.classList.add("movie");
+      div.innerHTML = `
+        <h2>${movie.title}</h2>
+        <p>${movie.getSummary()}</p>
+        <p>Status: <span class="${movie.isWatched ? 'watched' : 'not-watched'}">
+          ${movie.isWatched ? 'Watched :' : 'Not Watched '}
+        </span></p>
+      `;
+      movieListDiv.appendChild(div);
+    });
+  </script>
+</body>
+</html>

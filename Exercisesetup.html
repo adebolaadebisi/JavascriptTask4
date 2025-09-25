@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Library System</title>
+</head>                                                            
+<body>
+  <h1> Simple Library System</h1>
+  <div id="books"></div>
+  <div id="actions"></div>
+  <script>
+ let library = [
+      { title: "The Alchemist", author: "Paulo Coelho", pages: 197, available: true },
+      { title: "Atomic Habits", author: "James Clear", pages: 320, available: true },
+      { title: "Think and Grow Rich", author: "Napoleon Hill", pages: 238, available: true },
+      { title: "Rich Dad Poor Dad", author: "Robert Kiyosaki", pages: 336, available: true }
+    ];
+    function displayBooks() {
+      let booksDiv = document.getElementById("books");
+      booksDiv.innerHTML = "<h2>Library Books:</h2>";
+      library.forEach(book => {
+booksDiv.innerHTML += `<p>${book.title} by ${book.author} (${book.pages} pages) - ${book.available ? "Available" : "Checked Out"}</p>`;
+      });
+    }
+    function borrowBook(title) {
+      let book = library.find(b => b.title === title);
+      if (book && book.available) {
+        book.available = false;
+        alert(`You borrowed "${book.title}".`);
+      } else {
+        alert(`Sorry, "${title}" is not available.`);
+      }
+      displayBooks();
+}
+    function returnBook(title) {
+      let book = library.find(b => b.title === title);
+      if (book && !book.available) {
+        book.available = true;
+        alert(`You returned "${book.title}".`);
+      } else {
+        alert(`"${title}" was not borrowed.`);
+      }
+      displayBooks();
+    }
+    function searchByAuthor(author) {
+      let results = library.filter(b => b.author === author);
+let actionsDiv = document.getElementById("actions");
+      if (results.length > 0) {
+        actionsDiv.innerHTML = `<h2>Books by ${author}:</h2>`;
+        results.forEach(b => {
+          actionsDiv.innerHTML += `<p>${b.title}</p>`;
+        });
+      } else {
+        actionsDiv.innerHTML = `<p>No books found by ${author}</p>`;
+      }
+    }
+    // Initial Display
+    displayBooks();
+    // Example actions
+    borrowBook("Atomic Habits");
+returnBook("Atomic Habits");
+    searchByAuthor("Paulo Coelho");
+  </script>
+</body>
+    <style>
+        body{
+            background-color: blueviolet;
+            color: aquamarine;
+        }
+    </style>
+</html>
